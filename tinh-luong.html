@@ -321,11 +321,86 @@ footer {
     box-shadow: none;
     border: 1px solid #ddd;
   }
+
+  /* Không in màn hình mật khẩu */
+  #passwordProtection {
+    display: none !important;
+  }
 }
 </style>
 </head>
 
 <body>
+
+<!-- =====================================================
+     BẢO VỆ TRANG TÍNH LƯƠNG BẰNG MẬT KHẨU
+     ===================================================== -->
+
+<div id="passwordProtection" style="
+    position:fixed;
+    inset:0;
+    background:#123e2b;
+    z-index:99999;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+">
+
+  <div style="
+      background:white;
+      padding:30px;
+      border-radius:20px;
+      width:100%;
+      max-width:350px;
+      text-align:center;
+      box-shadow:0 5px 20px rgba(0,0,0,.3);
+  ">
+
+    <h2 style="margin-bottom:20px;color:#123e2b;">
+      🔐 BẢO VỆ TÍNH LƯƠNG
+    </h2>
+
+    <input
+      type="password"
+      id="salaryPassword"
+      placeholder="Nhập mật khẩu"
+      autocomplete="off"
+      style="
+        width:100%;
+        padding:12px;
+        border:1px solid #ccc;
+        border-radius:10px;
+        font-size:16px;
+        margin-bottom:15px;
+      "
+    >
+
+    <button
+      type="button"
+      onclick="checkSalaryPassword()"
+      style="
+        width:100%;
+        padding:12px;
+        background:#123e2b;
+        color:white;
+        border:none;
+        border-radius:10px;
+        font-size:16px;
+        font-weight:bold;
+        cursor:pointer;
+      "
+    >
+      🔓 ĐĂNG NHẬP
+    </button>
+
+    <p
+      id="passwordError"
+      style="color:red;margin-top:15px;"
+    ></p>
+
+  </div>
+</div>
 
 <header>
   <h1>💰 TÍNH LƯƠNG QUÂN NHÂN</h1>
@@ -837,6 +912,40 @@ document.querySelectorAll("input, select").forEach(function(element) {
  ************************************************************/
 
 calculateSalary();
+
+
+/************************************************************
+ * BẢO VỆ TRANG TÍNH LƯƠNG BẰNG MẬT KHẨU
+ ************************************************************/
+
+// ĐỔI MẬT KHẨU TẠI ĐÂY
+const SALARY_PASSWORD = "123456";
+
+function checkSalaryPassword() {
+
+  const password =
+    document.getElementById("salaryPassword").value;
+
+  if (password === SALARY_PASSWORD) {
+
+    document.getElementById("passwordProtection").style.display = "none";
+
+  } else {
+
+    document.getElementById("passwordError").innerText =
+      "❌ Mật khẩu không chính xác!";
+
+  }
+}
+
+// Nhấn Enter để đăng nhập
+document.getElementById("salaryPassword").addEventListener("keydown", function(e) {
+
+  if (e.key === "Enter") {
+    checkSalaryPassword();
+  }
+
+});
 
 </script>
 
