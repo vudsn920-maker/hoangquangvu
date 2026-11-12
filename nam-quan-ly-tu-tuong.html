@@ -44,7 +44,25 @@ th{background:#eaf2ff;}
 </head>
 <body>
 
+<!-- ================= KHÓA MẬT KHẨU ================= -->
+<script>
+(function(){
+
+    const MAT_KHAU = "123456";
+
+    const nhap = prompt("🔐 Nhập mật khẩu quản lý tư tưởng:");
+
+    if(nhap !== MAT_KHAU){
+        alert("❌ Mật khẩu không đúng!");
+        window.location.replace("index.html");
+    }
+
+})();
+</script>
+
 <header>
+
+
   <h1>QUẢN LÝ TƯ TƯỞNG</h1>
   <div style="margin-top:8px;">
     <button onclick="window.location.href='index.html'">⬅ Quay lại</button>
