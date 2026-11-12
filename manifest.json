@@ -1,0 +1,21 @@
+{
+  "name": "Thư viện học tập điện tử - Bộ binh",
+  "short_name": "Thư viện học tập",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#123e2b",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    }
+  ]
+}
