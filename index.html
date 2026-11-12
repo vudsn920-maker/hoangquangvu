@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Học tập</title>
+<title>Thư viện học tập điện tử</title>
 
 <!-- Cấu hình cài đặt ứng dụng -->
 <link rel="manifest" href="./manifest.json">
@@ -15,128 +16,355 @@
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial,sans-serif;padding:20px;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-/* Hình nền */
+body{
+  font-family:"Segoe UI",Arial,sans-serif;
+  padding:20px;
+  color:#17352a;
+  line-height:1.6;
+}
+
+/* ================= HÌNH NỀN ================= */
 #background{
-  position:fixed;top:0;left:0;width:100%;height:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
   background:url('background.jpg') no-repeat center center fixed;
   background-size:cover;
   z-index:-1;
 }
 
-/* Header */
+/* ================= HEADER ================= */
 header{
-  background:rgba(255,255,255,.85);
-  padding:20px;text-align:center;
-  position:fixed;top:0;width:100%;z-index:1000;
-  border-radius:0 0 20px 20px;
-  box-shadow:0 4px 10px rgba(0,0,0,.4);
+  background:rgba(12,48,34,.95);
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+  padding:20px;
+  text-align:center;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  border-radius:0 0 22px 22px;
+  border-bottom:3px solid #d4b45e;
+  box-shadow:0 8px 25px rgba(0,0,0,.3);
 }
-header h1{color:#007bff;font-size:2rem;}
 
-/* Nút cài đặt */
-#installAppBtn{
+header h1{
+  color:#f5d77a;
+  font-size:2rem;
+  font-weight:800;
+  letter-spacing:1px;
+  text-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+
+/* ================= NÚT CÀI ĐẶT ================= */
+#installAppBtn,
+#androidInstallBtn{
   display:inline-block;
   margin-top:12px;
-  padding:10px 18px;
-  border:0;
-  border-radius:25px;
-  background:#123e2b;
-  color:#fff;
+  padding:11px 22px;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:30px;
+  background:linear-gradient(135deg,#d8b75e,#f5df9b);
+  color:#173b2b;
   font-size:15px;
-  font-weight:bold;
+  font-weight:800;
   cursor:pointer;
-  box-shadow:0 3px 9px rgba(0,0,0,.25);
+  box-shadow:0 4px 12px rgba(0,0,0,.2);
+  transition:all .3s ease;
 }
-#installAppBtn[hidden]{display:none;}
 
-/* Section & Card */
-section{max-width:1000px;margin:145px auto 40px;}
+#installAppBtn:hover,
+#androidInstallBtn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 7px 18px rgba(0,0,0,.3);
+  background:linear-gradient(135deg,#f5df9b,#d8b75e);
+}
+
+#installAppBtn[hidden],
+#androidInstallBtn[hidden]{
+  display:none;
+}
+
+/* ================= SECTION ================= */
+section{
+  max-width:1000px;
+  margin:155px auto 40px;
+}
+
+/* ================= CARD ================= */
 .card{
-  background:rgba(255,255,255,.7);
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
   padding:30px;
   margin:25px 0;
-  border-radius:20px;
-  box-shadow:0 6px 15px rgba(0,0,0,.3);
-}
-.card h2{margin-bottom:20px;color:#1e3c72;}
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:0 10px 30px rgba(12,48,34,.18);
+  position:relative;
+  overflow:hidden;
 
-/* Grid các ô vuông */
+  opacity:0;
+  transform:translateY(30px);
+  animation:cardFadeIn 1s ease forwards;
+}
+
+/* Viền trang trí phía trên Card */
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:5px;
+  background:linear-gradient(90deg,#174c35,#4d9669,#d8b75e);
+}
+
+/* Tiêu đề Card */
+.card h2{
+  margin-bottom:22px;
+  color:#16452f;
+  font-size:1.45rem;
+  font-weight:800;
+  padding-bottom:12px;
+  border-bottom:2px solid rgba(35,105,67,.15);
+}
+
+/* ================= GRID BÀI HỌC ================= */
 .grid-lessons{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:20px;
 }
 
-/* Ô vuông trong suốt + blur */
+/* ================= Ô BÀI HỌC ================= */
 .square-lesson{
-  padding:40px 20px;
-  border-radius:20px;
+  padding:35px 20px;
+  border-radius:18px;
   text-align:center;
-  font-size:1.1rem;
-  font-weight:bold;
-  color:#1e3c72;
-  transition:.3s, transform .3s;
-  box-shadow:0 4px 10px rgba(0,0,0,.25);
-  background-color:rgba(255,255,255,.35);
-  backdrop-filter:blur(5px);
+  font-size:1.08rem;
+  font-weight:750;
+  color:#17452f;
+  transition:all .3s ease;
+  box-shadow:0 5px 15px rgba(18,62,43,.12);
+  background:linear-gradient(145deg,
+    rgba(255,255,255,.96),
+    rgba(224,241,230,.92));
+  border:1px solid rgba(38,115,74,.18);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  position:relative;
+  overflow:hidden;
 }
-.square-lesson a{text-decoration:none;color:inherit;display:block;}
+
+/* Vệt màu trang trí */
+.square-lesson::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:4px;
+  background:linear-gradient(90deg,#236b46,#d9b85e);
+  opacity:.8;
+}
+
+.square-lesson a{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+  position:relative;
+  z-index:1;
+}
+
 .square-lesson:hover{
-  transform:translateY(-5px);
-  background-color:rgba(255,255,255,.5);
+  transform:translateY(-7px);
+  background:linear-gradient(145deg,#ffffff,#dcefe2);
+  border-color:#6ba982;
+  box-shadow:0 12px 25px rgba(18,62,43,.22);
+  color:#0c6037;
 }
 
-/* Icon */
-.icon{font-size:2.5rem;margin-bottom:10px;}
+/* ================= MÀU RIÊNG TỪNG NHÓM ================= */
 
-/* Responsive */
-@media(max-width:600px){
-  header h1{font-size:1.35rem;}
-  section{margin-top:135px;}
-  .grid-lessons{grid-template-columns:1fr;}
-  .card{padding:22px;}
+/* Nhóm truyền thống đơn vị */
+.card:nth-of-type(2) .square-lesson{
+  background:linear-gradient(145deg,
+    rgba(255,255,255,.96),
+    rgba(232,240,218,.92));
+  border-color:rgba(112,145,65,.25);
 }
 
-/* Hiệu ứng Card xuất hiện từ từ */
-.card {
-  opacity:0;
-  transform:translateY(30px);
-  animation:cardFadeIn 1s ease forwards;
+.card:nth-of-type(2) .square-lesson:hover{
+  background:linear-gradient(145deg,#fff,#e8f1d9);
 }
+
+/* Nhóm giáo dục chính trị */
+.card:nth-of-type(3) .square-lesson{
+  background:linear-gradient(145deg,
+    rgba(255,255,255,.96),
+    rgba(222,239,233,.92));
+  border-color:rgba(35,115,91,.25);
+}
+
+.card:nth-of-type(3) .square-lesson:hover{
+  background:linear-gradient(145deg,#fff,#d8eee5);
+}
+
+/* Nhóm lãnh đạo và học tập */
+.card:nth-of-type(4) .square-lesson{
+  background:linear-gradient(145deg,
+    rgba(255,255,255,.96),
+    rgba(225,233,248,.92));
+  border-color:rgba(65,100,160,.22);
+  color:#244878;
+}
+
+.card:nth-of-type(4) .square-lesson:hover{
+  background:linear-gradient(145deg,#fff,#dce7fa);
+}
+
+/* Nhóm bài kiểm tra */
+.card:nth-of-type(5) .square-lesson{
+  background:linear-gradient(145deg,
+    rgba(255,255,255,.96),
+    rgba(250,238,214,.92));
+  border-color:rgba(190,145,55,.25);
+  color:#76551c;
+}
+
+.card:nth-of-type(5) .square-lesson:hover{
+  background:linear-gradient(145deg,#fff,#f8e9c8);
+}
+
+/* ================= ICON ================= */
+.icon{
+  font-size:2.5rem;
+  margin-bottom:10px;
+}
+
+/* ================= HIỆU ỨNG CARD ================= */
 .card:nth-of-type(1){animation-delay:.2s;}
 .card:nth-of-type(2){animation-delay:.5s;}
 .card:nth-of-type(3){animation-delay:.8s;}
 .card:nth-of-type(4){animation-delay:1.1s;}
 .card:nth-of-type(5){animation-delay:1.4s;}
-@keyframes cardFadeIn {
-  from{opacity:0;transform:translateY(30px);}
-  to{opacity:1;transform:translateY(0);}
+
+@keyframes cardFadeIn{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
-/* Nút điều khiển nhạc */
-.music-control {
+/* ================= NÚT ĐIỀU KHIỂN NHẠC ================= */
+.music-control{
   position:fixed;
-  bottom:20px;
-  right:20px;
+  bottom:22px;
+  right:22px;
   z-index:2000;
-  background:rgba(255,255,255,.9);
-  padding:12px 18px;
-  border-radius:30px;
-  box-shadow:0 4px 12px rgba(0,0,0,.3);
+  background:linear-gradient(135deg,#123e2b,#246b48);
+  padding:13px 21px;
+  border-radius:35px;
+  box-shadow:0 6px 18px rgba(0,0,0,.3);
   cursor:pointer;
-  border:none;
+  border:1px solid rgba(255,255,255,.25);
   font-size:16px;
-  font-weight:bold;
-  color:#1e3c72;
+  font-weight:800;
+  color:#fff;
+  transition:all .3s ease;
+}
+
+.music-control:hover{
+  transform:translateY(-4px);
+  background:linear-gradient(135deg,#246b48,#123e2b);
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+}
+
+/* ================= RESPONSIVE ĐIỆN THOẠI ================= */
+@media(max-width:600px){
+
+  body{
+    padding:12px;
+  }
+
+  header{
+    padding:16px 12px;
+    border-radius:0 0 18px 18px;
+  }
+
+  header h1{
+    font-size:1.25rem;
+    letter-spacing:.5px;
+  }
+
+  section{
+    margin-top:135px;
+  }
+
+  .grid-lessons{
+    grid-template-columns:1fr;
+    gap:15px;
+  }
+
+  .card{
+    padding:22px 18px;
+    margin:20px 0;
+    border-radius:18px;
+  }
+
+  .card h2{
+    font-size:1.2rem;
+  }
+
+  .square-lesson{
+    padding:25px 15px;
+    font-size:1rem;
+  }
+
+  .music-control{
+    bottom:15px;
+    right:15px;
+    padding:11px 17px;
+    font-size:14px;
+  }
+}
+
+/* ================= GIẢM CHUYỂN ĐỘNG ================= */
+@media(prefers-reduced-motion:reduce){
+  .card{
+    animation:none;
+    opacity:1;
+    transform:none;
+  }
+
+  .square-lesson,
+  .music-control,
+  #installAppBtn,
+  #androidInstallBtn{
+    transition:none;
+  }
 }
 </style>
 </head>
 
 <body>
-<!-- NHẠC NỀN -->
+
+<!-- ================= NHẠC NỀN ================= -->
 <audio id="backgroundMusic" loop>
   <source src="nhacnen.mp3" type="audio/mpeg">
 </audio>
@@ -148,85 +376,175 @@ section{max-width:1000px;margin:145px auto 40px;}
 
 <div id="background"></div>
 
+<!-- ================= HEADER ================= -->
 <header>
   <h1>THƯ VIỆN HỌC TẬP ĐIỆN TỬ</h1>
-  <button id="installAppBtn" hidden>📲 Cài đặt ứng dụng</button>
 
-  <button id="androidInstallBtn" hidden style="
-    margin-top:12px;
-    padding:10px 18px;
-    border:0;
-    border-radius:25px;
-    background:#168447;
-    color:white;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;">
+  <button id="installAppBtn" hidden>
+    📲 Cài đặt ứng dụng
+  </button>
+
+  <button id="androidInstallBtn" hidden>
     📲 CÀI ĐẶT TRÊN ANDROID
   </button>
 </header>
 
+<!-- ================= NỘI DUNG ================= -->
 <section>
-  <!-- CARD 0: Giới thiệu -->
+
+  <!-- CARD 0: GIỚI THIỆU -->
   <div class="card">
     <h2>👋 Chào mừng</h2>
-    <p>Đây là trang học tập của đơn vị, mời các đồng chí tham gia học tập đầy đủ các nội dung được cung cấp. Chúc các đồng chí học tập hiệu quả và nâng cao kiến thức!</p>
+
+    <p>
+      Đây là trang học tập của đơn vị, mời các đồng chí tham gia học tập đầy đủ các nội dung được cung cấp.
+      Chúc các đồng chí học tập hiệu quả và nâng cao kiến thức!
+    </p>
   </div>
 
-  <!-- CARD 1: Truyền thống đơn vị -->
+  <!-- CARD 1: TRUYỀN THỐNG ĐƠN VỊ -->
   <div class="card">
-    <h2>Truyền thống đơn vị</h2>
+    <h2>🏅 Truyền thống đơn vị</h2>
+
     <div class="grid-lessons">
-	<div class="square-lesson"><a href="truyen-thong-quandoi.html">Truyền thống Quân đội</a></div>
-      <div class="square-lesson"><a href="truyen-thong-quandoan34.html">Truyền thống Quân đoàn 34</a></div>
-      <div class="square-lesson"><a href="truyen-thong-sudoan10.html">Truyền thống Sư đoàn 10</a></div>
-      <div class="square-lesson"><a href="Anhdonvi.html">Ảnh đơn vị</a></div>
+
+      <div class="square-lesson">
+        <a href="truyen-thong-quandoi.html">
+          Truyền thống Quân đội
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="truyen-thong-quandoan34.html">
+          Truyền thống Quân đoàn 34
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="truyen-thong-sudoan10.html">
+          Truyền thống Sư đoàn 10
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="Anhdonvi.html">
+          Ảnh đơn vị
+        </a>
+      </div>
+
     </div>
   </div>
 
-  <!-- CARD 2: Giáo dục chính trị -->
+  <!-- CARD 2: GIÁO DỤC CHÍNH TRỊ -->
   <div class="card">
     <h2>📚 Giáo dục chính trị &amp; Thông tin</h2>
+
     <div class="grid-lessons">
-      <div class="square-lesson"><a href="gdct-co-ban.html">📘 Giáo dục chính trị cơ bản</a></div>
-      <div class="square-lesson"><a href="pho-bien-gdpl.html">📖 Phổ biến pháp luật</a></div>
-      <div class="square-lesson"><a href="nam-quan-ly-tu-tuong.html">🧠 Nắm tư tưởng</a></div>
+
+      <div class="square-lesson">
+        <a href="gdct-co-ban.html">
+          📘 Giáo dục chính trị cơ bản
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="pho-bien-gdpl.html">
+          📖 Phổ biến pháp luật
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="nam-quan-ly-tu-tuong.html">
+          🧠 Nắm tư tưởng
+        </a>
+      </div>
+
     </div>
   </div>
 
-  <!-- CARD 3: Lãnh đạo & Học tập -->
+  <!-- CARD 3: LÃNH ĐẠO & HỌC TẬP -->
   <div class="card">
     <h2>🗂️ Lãnh đạo &amp; Học tập</h2>
+
     <div class="grid-lessons">
-      <div class="square-lesson"><a href="bao-cao-cap-tren.html">📊 Nghị quyết lãnh đạo</a></div>
-      <div class="square-lesson"><a href="https://vr360.yoolife.vn/bao-tang-lich-su-quan-su-viet-nam-zmuseumc118u26724" target="_blank" rel="noopener">🏛️ Tham quan bảo tàng</a></div>
-      <div class="square-lesson"><a href="binh-dan-hoc-vu.html">📝 Bình dân học vụ số</a></div>
-      <div class="square-lesson"><a href="van-ban-huong-dan.html">📄 Văn bản hướng dẫn</a></div>
+
+      <div class="square-lesson">
+        <a href="bao-cao-cap-tren.html">
+          📊 Nghị quyết lãnh đạo
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="https://vr360.yoolife.vn/bao-tang-lich-su-quan-su-viet-nam-zmuseumc118u26724"
+           target="_blank" rel="noopener">
+          🏛️ Tham quan bảo tàng
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="binh-dan-hoc-vu.html">
+          📝 Bình dân học vụ số
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="van-ban-huong-dan.html">
+          📄 Văn bản hướng dẫn
+        </a>
+      </div>
+
     </div>
   </div>
 
-  <!-- CARD 4: Bài kiểm tra -->
+  <!-- CARD 4: BÀI KIỂM TRA -->
   <div class="card">
     <h2>📝 Bài kiểm tra</h2>
+
     <div class="grid-lessons">
-      <div class="square-lesson"><a href="bai-kiem-tra.html">📋 Bài kiểm tra 1</a></div>
-      <div class="square-lesson"><a href="ket-qua-kiem-tra.html">📊 Kết quả kiểm tra</a></div>
-      <div class="square-lesson"><a href="loi-bac-ho-day.html">⭐ Lời Bác Hồ dạy ngày này năm xưa</a></div>
-      <div class="square-lesson"><a href="tinh-luong.html">💰 Tính lương</a></div>
+
+      <div class="square-lesson">
+        <a href="bai-kiem-tra.html">
+          📋 Bài kiểm tra 1
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="ket-qua-kiem-tra.html">
+          📊 Kết quả kiểm tra
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="loi-bac-ho-day.html">
+          ⭐ Lời Bác Hồ dạy ngày này năm xưa
+        </a>
+      </div>
+
+      <div class="square-lesson">
+        <a href="tinh-luong.html">
+          💰 Tính lương
+        </a>
+      </div>
+
     </div>
   </div>
+
 </section>
 
+<!-- ================= JAVASCRIPT ================= -->
 <script>
+
+/* ================= ĐIỀU KHIỂN NHẠC ================= */
 const music = document.getElementById("backgroundMusic");
 const musicButton = document.getElementById("musicButton");
+
 music.volume = 0.4;
 
-music.addEventListener("error", function() {
+music.addEventListener("error", function(){
   musicButton.innerHTML = "❌ Không tìm thấy nhạc";
 });
 
-window.addEventListener("load", function() {
+window.addEventListener("load", function(){
   music.play().then(() => {
     musicButton.innerHTML = "🔊 Tắt nhạc";
   }).catch(() => {
@@ -234,87 +552,138 @@ window.addEventListener("load", function() {
   });
 });
 
-function toggleMusic() {
-  if (music.paused) {
+function toggleMusic(){
+
+  if(music.paused){
+
     music.play().then(() => {
       musicButton.innerHTML = "🔊 Tắt nhạc";
     }).catch((error) => {
       alert("Không phát được nhạc. Hãy kiểm tra file MP3!");
       console.log(error);
     });
-  } else {
+
+  }else{
+
     music.pause();
     musicButton.innerHTML = "▶️ Bật nhạc";
+
   }
 }
 
-// Đăng ký PWA
-if ("serviceWorker" in navigator) {
+/* ================= ĐĂNG KÝ PWA ================= */
+if("serviceWorker" in navigator){
+
   window.addEventListener("load", () => {
+
     navigator.serviceWorker.register("./sw.js")
-      .catch(error => console.error("Không đăng ký được ứng dụng:", error));
+      .catch(error => console.error(
+        "Không đăng ký được ứng dụng:",error
+      ));
+
   });
+
 }
 
-// Nút cài đặt ứng dụng
+/* ================= NÚT CÀI ĐẶT ỨNG DỤNG ================= */
 let deferredPrompt;
+
 const installBtn = document.getElementById("installAppBtn");
 const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 const isAndroid = /Android/i.test(navigator.userAgent);
 const androidBtn = document.getElementById("androidInstallBtn");
-const isStandalone = window.matchMedia("(display-mode: standalone)").matches ||
-                     navigator.standalone === true;
-  if (isAndroid && !isStandalone) {
+
+const isStandalone =
+  window.matchMedia("(display-mode: standalone)").matches ||
+  navigator.standalone === true;
+
+/* Hiện nút cài đặt Android */
+if(isAndroid && !isStandalone){
   androidBtn.hidden = false;
 }
 
+/* Nhận sự kiện cài đặt */
 window.addEventListener("beforeinstallprompt", event => {
+
   event.preventDefault();
   deferredPrompt = event;
 
-  if (isAndroid) {
+  if(isAndroid){
     androidBtn.hidden = false;
-  } else {
+  }else{
     installBtn.hidden = false;
   }
+
 });
 
+/* Nút cài đặt thông thường */
 installBtn.addEventListener("click", async () => {
-  if (deferredPrompt) {
+
+  if(deferredPrompt){
+
     deferredPrompt.prompt();
+
     await deferredPrompt.userChoice;
+
     deferredPrompt = null;
     installBtn.hidden = true;
-  } else if (isIOS) {
-    alert("Trên iPhone/iPad: mở bằng Safari, nhấn nút Chia sẻ → Thêm vào màn hình chính.");
-  } else {
-    alert("Mở menu trình duyệt (⋮) và chọn Cài đặt ứng dụng hoặc Thêm vào màn hình chính.");
+
+  }else if(isIOS){
+
+    alert(
+      "Trên iPhone/iPad: mở bằng Safari, nhấn nút Chia sẻ → Thêm vào màn hình chính."
+    );
+
+  }else{
+
+    alert(
+      "Mở menu trình duyệt (⋮) và chọn Cài đặt ứng dụng hoặc Thêm vào màn hình chính."
+    );
+
   }
+
 });
-  androidBtn.addEventListener("click", async () => {
-  if (deferredPrompt) {
+
+/* Nút cài đặt Android */
+androidBtn.addEventListener("click", async () => {
+
+  if(deferredPrompt){
+
     deferredPrompt.prompt();
 
     const choice = await deferredPrompt.userChoice;
 
-    if (choice.outcome === "accepted") {
+    if(choice.outcome === "accepted"){
       androidBtn.hidden = true;
     }
 
     deferredPrompt = null;
-  } else {
-    alert("Hãy mở Chrome, nhấn dấu ba chấm ⋮ và chọn Cài đặt ứng dụng hoặc Thêm vào màn hình chính.");
+
+  }else{
+
+    alert(
+      "Hãy mở Chrome, nhấn dấu ba chấm ⋮ và chọn Cài đặt ứng dụng hoặc Thêm vào màn hình chính."
+    );
+
   }
+
 });
 
+/* Khi ứng dụng đã được cài đặt */
 window.addEventListener("appinstalled", () => {
+
   installBtn.hidden = true;
   androidBtn.hidden = true;
   deferredPrompt = null;
+
 });
-if (isIOS && !isStandalone) {
+
+/* Hỗ trợ cài đặt iPhone/iPad */
+if(isIOS && !isStandalone){
   installBtn.hidden = false;
 }
+
 </script>
+
 </body>
 </html>
