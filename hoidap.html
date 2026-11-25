@@ -1,0 +1,435 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#063b32">
+<title>Trợ lý Hoàng Quang Vũ</title>
+<style>
+:root{
+  --green:#07543b;--green2:#087a50;--blue:#0879b9;
+  --ink:#17324e;--muted:#718198;--line:#e4ebf3;
+  --glass:rgba(255,255,255,.88);
+  --shadow:0 18px 55px rgba(14,48,73,.13);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+body{
+  min-height:100vh;
+  background:#eaf2f5 url("./background.jpg") center top/cover fixed no-repeat;
+  padding:22px;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:linear-gradient(135deg,rgba(4,64,48,.13),rgba(8,121,185,.10));
+}
+.page{width:min(1450px,100%);margin:0 auto}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:15px;
+  padding:5px 3px 20px;
+}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;color:#07543b}
+.brand-mark{
+  width:43px;height:43px;border-radius:14px;display:grid;place-items:center;
+  color:#fff;font-size:22px;background:linear-gradient(145deg,#0b9b68,#064832);
+  box-shadow:0 7px 18px #07543b35
+}
+.brand small{display:block;color:#6e8292;font-size:10px;letter-spacing:1.4px;margin-top:3px}
+.back{
+  text-decoration:none;color:#07543b;font-size:13px;font-weight:800;
+  background:#ffffffd9;border:1px solid #d7e6df;border-radius:30px;
+  padding:11px 17px;box-shadow:0 5px 15px #15395d12
+}
+.back:hover{background:#fff;transform:translateY(-1px)}
+.heading{text-align:center;margin:4px 0 24px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;padding:7px 13px;
+  border-radius:30px;background:#e1f5eb;color:#087348;
+  font-size:11px;font-weight:900;letter-spacing:1.6px
+}
+.pulse{width:7px;height:7px;border-radius:50%;background:#16b978;box-shadow:0 0 0 5px #16b97820}
+h1{font-size:clamp(29px,4vw,44px);margin:12px 0 7px;color:#123c35;letter-spacing:.5px}
+.heading p{margin:0;color:#718198;font-size:14px}
+.workspace{
+  display:grid;grid-template-columns:minmax(290px,.78fr) minmax(0,1.45fr);
+  gap:20px;align-items:stretch
+}
+.intro,.chat{
+  border:1px solid #ffffffc9;border-radius:27px;background:var(--glass);
+  box-shadow:var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  overflow:hidden
+}
+.intro{
+  position:relative;min-height:650px;padding:30px 28px;
+  background:linear-gradient(155deg,rgba(255,255,255,.94),rgba(228,246,239,.86))
+}
+.intro:before,.intro:after{
+  content:"";position:absolute;border-radius:50%;pointer-events:none
+}
+.intro:before{width:260px;height:260px;background:#b7ead5;filter:blur(2px);right:-100px;top:110px;opacity:.42}
+.intro:after{width:190px;height:190px;background:#b9e4f5;left:-100px;bottom:-60px;opacity:.42}
+.intro-content{position:relative;z-index:1}
+.ai-label{font-size:11px;letter-spacing:2px;font-weight:900;color:#0b8a5b}
+.intro h2{font-size:25px;line-height:1.3;margin:12px 0 9px;color:#123c35}
+.intro .desc{font-size:13px;line-height:1.75;color:#6b7f8b;margin:0}
+.robot-wrap{height:330px;display:grid;place-items:center;position:relative;margin:10px 0 0}
+.robot-glow{
+  position:absolute;width:250px;height:250px;border-radius:50%;
+  background:radial-gradient(circle,#b7f1dc 0%,#d9f5ee 47%,transparent 72%);
+  animation:breathe 4s ease-in-out infinite
+}
+.robot{width:min(270px,90%);position:relative;z-index:1;filter:drop-shadow(0 18px 15px rgba(18,91,77,.16));animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes breathe{0%,100%{transform:scale(.94);opacity:.7}50%{transform:scale(1.07);opacity:1}}
+.features{display:grid;gap:10px;margin-top:4px}
+.feature{display:flex;align-items:center;gap:11px;font-size:12px;color:#486475;font-weight:700}
+.feature-icon{width:29px;height:29px;display:grid;place-items:center;border-radius:10px;background:#e4f6ee;color:#078454;font-size:15px}
+.chat{min-height:650px;display:flex;flex-direction:column;background:rgba(255,255,255,.94)}
+.chat-head{
+  display:flex;align-items:center;justify-content:space-between;padding:19px 22px;
+  border-bottom:1px solid var(--line);background:rgba(255,255,255,.75)
+}
+.assistant{display:flex;align-items:center;gap:11px}
+.avatar{
+  width:42px;height:42px;border-radius:14px;display:grid;place-items:center;
+  color:#fff;background:linear-gradient(145deg,#12a875,#07543b);font-size:21px
+}
+.assistant strong{display:block;font-size:14px;color:#193d3b}
+.assistant small{display:block;margin-top:4px;color:#16a36c;font-size:11px;font-weight:700}
+.status{width:7px;height:7px;background:#20bd79;border-radius:50%;display:inline-block;margin-right:4px}
+.clear{
+  border:1px solid #e3eaf0;background:#fff;color:#718198;border-radius:10px;
+  padding:8px 11px;font-size:11px;font-weight:700;cursor:pointer
+}
+.clear:hover{color:#b52c37;border-color:#f0cdd0}
+.messages{
+  flex:1;min-height:420px;max-height:540px;overflow-y:auto;padding:25px 24px;
+  background:linear-gradient(180deg,#fbfdff,#f7fafc)
+}
+.message{display:flex;gap:10px;margin-bottom:18px;align-items:flex-start}
+.message.user{flex-direction:row-reverse}
+.mini-avatar{
+  flex:0 0 30px;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;
+  background:#e3f5ed;color:#08794f;font-size:14px
+}
+.user .mini-avatar{background:#e8effa;color:#42689c}
+.bubble{
+  max-width:min(82%,650px);padding:13px 15px;border-radius:4px 16px 16px 16px;
+  background:#fff;border:1px solid #e8eef3;color:#344e61;font-size:13px;line-height:1.7;
+  box-shadow:0 4px 12px rgba(30,65,90,.04);white-space:pre-wrap;overflow-wrap:anywhere
+}
+.user .bubble{background:linear-gradient(135deg,#087a50,#08664b);color:#fff;border:0;border-radius:16px 4px 16px 16px}
+.welcome-title{font-weight:900;color:#173e39;margin-bottom:4px}
+.suggestions{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0 40px}
+.suggestion{
+  border:1px solid #cfe7dc;background:#f5fcf8;color:#08764d;border-radius:20px;
+  padding:8px 12px;font-size:11px;font-weight:700;cursor:pointer
+}
+.suggestion:hover{background:#e4f6ed;border-color:#9bd7b9}
+.typing{display:flex;gap:4px;align-items:center;padding:5px 0}
+.typing i{width:6px;height:6px;background:#8aa69a;border-radius:50%;animation:dot 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-5px);opacity:1}}
+.composer-wrap{padding:15px 18px 17px;border-top:1px solid var(--line);background:#fff}
+.composer{
+  display:flex;align-items:flex-end;gap:10px;padding:9px 10px 9px 15px;
+  border:1px solid #dce7ed;border-radius:17px;background:#fbfdff;
+  box-shadow:inset 0 1px 3px #163d5910
+}
+.composer:focus-within{border-color:#69b99a;box-shadow:0 0 0 3px #0b98601a}
+textarea{
+  flex:1;resize:none;border:0;outline:0;background:transparent;color:#203c50;
+  font:13px/1.6 Arial,sans-serif;min-height:28px;max-height:120px;padding:5px 0
+}
+textarea::placeholder{color:#9aa9b5}
+.send{
+  flex:0 0 40px;width:40px;height:40px;border:0;border-radius:13px;
+  background:linear-gradient(145deg,#0b9a65,#07543b);color:#fff;font-size:18px;
+  box-shadow:0 5px 12px #087a5035;cursor:pointer
+}
+.send:disabled{opacity:.45;cursor:not-allowed}
+.hint{text-align:center;color:#9aa8b3;font-size:10px;margin:9px 0 0}
+@media(max-width:900px){
+  body{padding:14px}.workspace{grid-template-columns:1fr}
+  .intro{min-height:0;padding:23px 24px}
+  .robot-wrap{height:240px}.robot{width:210px}
+  .features{grid-template-columns:repeat(3,1fr)}
+  .chat{min-height:620px}.messages{min-height:390px}
+}
+@media(max-width:560px){
+  body{padding:10px}.topbar{padding-bottom:14px}.brand{font-size:13px}
+  .brand-mark{width:38px;height:38px}.back{padding:9px 12px;font-size:11px}
+  .heading{margin-bottom:16px}.heading p{font-size:12px}
+  .intro,.chat{border-radius:20px}.intro{padding:20px}
+  .intro h2{font-size:21px}.robot-wrap{height:205px}
+  .robot{width:185px}.features{grid-template-columns:1fr}
+  .chat{min-height:600px}.chat-head{padding:14px}
+  .messages{padding:18px 13px;min-height:390px}
+  .bubble{max-width:88%;font-size:12px}
+  .suggestions{margin-left:0}.composer-wrap{padding:12px}
+}
+
+/* Tăng độ rõ chữ khu vực tiêu đề */
+.brand{
+  background:rgba(255,255,255,.94);
+  padding:9px 15px 9px 9px;
+  border-radius:16px;
+  box-shadow:0 5px 18px rgba(0,0,0,.10);
+  color:#064832;
+}
+
+.brand small{
+  color:#345f52;
+  font-weight:800;
+}
+
+.heading{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:9px;
+  padding:18px 15px;
+  border-radius:22px;
+  background:rgba(255,255,255,.90);
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 8px 25px rgba(0,0,0,.09);
+}
+
+.heading h1{
+  color:#064832;
+  text-shadow:0 1px 1px rgba(255,255,255,.8);
+}
+
+.heading p{
+  color:#294e43;
+  font-weight:700;
+}
+
+.eyebrow{
+  background:#d9f3e5;
+  color:#07543b;
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">✦</div>
+      <div>TRỢ LÝ HOÀNG QUANG VŨ      <small>TRỢ LÝ · HOÀNG QUANG VŨ</small>
+      </div>
+    </div>
+    <a class="back" href="./index.html">← Về trang chủ</a>
+  </header>
+
+  <section class="heading">
+    <span class="eyebrow"><span class="pulse"></span> TRỢ LÝ HOÀNG QUANG VŨ</span>
+    <h1>HỎI ĐÁP</h1>
+    <p>Đặt câu hỏi – Nhận câu trả lời nhanh chóng cùng trợ lý </p>
+  </section>
+
+  <main class="workspace">
+    <section class="intro">
+      <div class="intro-content">
+        <div class="ai-label">TRỢ LÝ </div>
+        <h2>Xin chào!<br>Tôi là trợ lý Hoàng Quang Vũ.</h2>
+        <p class="desc">Luôn sẵn sàng hỗ trợ cán bộ, chiến sĩ tra cứu thông tin, giải đáp thắc mắc và hỗ trợ công tác quân sự, quốc phòng địa phương.</p>
+        <div class="robot-wrap">
+          <div class="robot-glow"></div>
+          <svg class="robot" viewBox="0 0 300 320" role="img" aria-label="Robot trợ lý  thân thiện">
+            <defs>
+              <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#d9f0e8"/></linearGradient>
+              <linearGradient id="head" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#faffff"/><stop offset="1" stop-color="#c6e8df"/></linearGradient>
+              <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#20c9a0"/><stop offset="1" stop-color="#087b75"/></linearGradient>
+            </defs>
+            <ellipse cx="150" cy="293" rx="82" ry="13" fill="#5ba993" opacity=".16"/>
+            <path d="M113 211 L91 265 Q88 276 101 280 L125 284 L139 238 M187 211 L209 265 Q212 276 199 280 L175 284 L161 238" fill="url(#body)" stroke="#a5d6c8" stroke-width="5"/>
+            <rect x="119" y="205" width="62" height="80" rx="24" fill="url(#body)" stroke="#a5d6c8" stroke-width="5"/>
+            <rect x="79" y="112" width="142" height="118" rx="38" fill="url(#body)" stroke="#a5d6c8" stroke-width="5"/>
+            <rect x="62" y="145" width="25" height="53" rx="12" fill="url(#blue)"/>
+            <rect x="213" y="145" width="25" height="53" rx="12" fill="url(#blue)"/>
+            <rect x="91" y="43" width="118" height="111" rx="36" fill="url(#head)" stroke="#91cdbb" stroke-width="5"/>
+            <path d="M150 43 V25" stroke="#54ad96" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="150" cy="18" r="10" fill="#18b98b" stroke="#fff" stroke-width="4"/>
+            <rect x="105" y="76" width="90" height="49" rx="19" fill="#173f4a"/>
+            <ellipse cx="127" cy="99" rx="7" ry="10" fill="#65f4d1"/>
+            <ellipse cx="173" cy="99" rx="7" ry="10" fill="#65f4d1"/>
+            <path d="M139 113 Q150 122 161 113" fill="none" stroke="#65f4d1" stroke-width="3" stroke-linecap="round"/>
+            <path d="M118 173 Q150 192 182 173" fill="none" stroke="#9bcfbe" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="150" cy="211" r="10" fill="url(#blue)"/>
+            <path d="M97 247 L75 259 Q64 267 73 277 Q80 285 91 278 L115 261" fill="url(#body)" stroke="#a5d6c8" stroke-width="5"/>
+            <path d="M203 247 L225 259 Q236 267 227 277 Q220 285 209 278 L185 261" fill="url(#body)" stroke="#a5d6c8" stroke-width="5"/>
+            <circle cx="104" cy="169" r="4" fill="#f4c85b"/><circle cx="196" cy="169" r="4" fill="#f4c85b"/>
+          </svg>
+        </div>
+        <div class="features">
+          <div class="feature"><span class="feature-icon">✧</span> Giải đáp thông minh, dễ hiểu</div>
+          <div class="feature"><span class="feature-icon">◷</span> Hỗ trợ mọi lúc, mọi nơi</div>
+          <div class="feature"><span class="feature-icon">⌁</span> Trò chuyện tự nhiên bằng tiếng Việt</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chat">
+      <div class="chat-head">
+        <div class="assistant">
+          <div class="avatar">✦</div>
+          <div><strong>Trợ lý Hoàng Quang Vũ</strong><small><span class="status"></span> Sẵn sàng hỗ trợ</small></div>
+        </div>
+        <button class="clear" id="clearBtn" type="button">↻ Làm mới</button>
+      </div>
+      <div class="messages" id="messages" aria-live="polite">
+        <div class="message">
+          <div class="mini-avatar">✦</div>
+          <div class="bubble">
+            <div class="welcome-title">Xin chào! Rất vui được hỗ trợ bạn.</div>
+            Tôi là trợ lý Hoàng Quang Vũ. Bạn hãy nhập câu hỏi, tôi sẽ hỗ trợ giải đáp và cung cấp thông tin cần thiết.
+          </div>
+        </div>
+        <div class="suggestions">
+          <button class="suggestion" type="button">Hướng dẫn sử dụng trang web</button>
+          <button class="suggestion" type="button">Giải thích một vấn đề</button>
+          <button class="suggestion" type="button">Soạn thảo văn bản</button>
+        </div>
+      </div>
+      <div class="composer-wrap">
+        <form class="composer" id="chatForm">
+          <textarea id="question" rows="1" placeholder="Nhập câu hỏi của bạn tại đây..." aria-label="Nhập câu hỏi"></textarea>
+          <button class="send" id="sendBtn" type="submit" aria-label="Gửi câu hỏi">➤</button>
+        </form>
+        <p class="hint">Nhấn Enter để gửi · Shift + Enter để xuống dòng</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+/* Kết nối trợ lý AI Gemini qua Google Apps Script */
+const API_ENDPOINT = "https://script.google.com/macros/s/AKfycbx2_nsbz9s43K-9IEpg-gseJbnk_WzjeJrZyIobJ8AElGS2E_kX8bfMffB2Rokl-3NEjA/exec";
+
+const messages = document.getElementById("messages");
+const question = document.getElementById("question");
+const form = document.getElementById("chatForm");
+const sendBtn = document.getElementById("sendBtn");
+const clearBtn = document.getElementById("clearBtn");
+
+function addMessage(text, who){
+  const row = document.createElement("div");
+  row.className = "message " + (who === "user" ? "user" : "bot");
+  const avatar = document.createElement("div");
+  avatar.className = "mini-avatar";
+  avatar.textContent = who === "user" ? "●" : "✦";
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.textContent = text;
+  row.append(avatar, bubble);
+  messages.appendChild(row);
+  messages.scrollTop = messages.scrollHeight;
+  return bubble;
+}
+
+function addTyping(){
+  const row = document.createElement("div");
+  row.className = "message";
+  row.id = "typingRow";
+  const avatar = document.createElement("div");
+  avatar.className = "mini-avatar";
+  avatar.textContent = "✦";
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
+  row.append(avatar,bubble);
+  messages.appendChild(row);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// Gọi Apps Script bằng JSONP để tương thích khi website chạy trên GitHub Pages.
+function askAI(text){
+  return new Promise((resolve,reject)=>{
+    const callbackName = "geminiCallback_" + Date.now() + "_" + Math.floor(Math.random()*100000);
+    const script = document.createElement("script");
+    let finished = false;
+    const cleanup = ()=>{
+      if(finished) return;
+      finished = true;
+      clearTimeout(timeout);
+      script.remove();
+      delete window[callbackName];
+    };
+    const timeout = setTimeout(()=>{
+      cleanup();
+      reject(new Error("Máy chủ phản hồi quá lâu. Bạn vui lòng thử lại."));
+    },60000);
+
+    window[callbackName] = data=>{
+      cleanup();
+      if(data && (data.reply || data.answer)) resolve(data.reply || data.answer);
+      else reject(new Error(data && data.error ? data.error : "Trợ lý chưa trả về câu trả lời."));
+    };
+    script.onerror = ()=>{
+      cleanup();
+      reject(new Error("Không thể kết nối máy chủ Google Apps Script. Hãy kiểm tra quyền triển khai ứng dụng web."));
+    };
+    script.src = API_ENDPOINT
+      + "?message=" + encodeURIComponent(text)
+      + "&callback=" + encodeURIComponent(callbackName)
+      + "&t=" + Date.now();
+    document.head.appendChild(script);
+  });
+}
+
+async function sendQuestion(value){
+  const text = value.trim();
+  if(!text) return;
+  document.querySelector(".suggestions")?.remove();
+  addMessage(text,"user");
+  question.value = "";
+  question.style.height = "auto";
+  sendBtn.disabled = true;
+  addTyping();
+
+  try{
+    const answer = await askAI(text);
+    document.getElementById("typingRow")?.remove();
+    addMessage(answer,"bot");
+  }catch(error){
+    document.getElementById("typingRow")?.remove();
+    addMessage(error.message || "Đã xảy ra lỗi kết nối. Vui lòng thử lại.","bot");
+  }finally{
+    sendBtn.disabled = false;
+    question.focus();
+  }
+}
+
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  sendQuestion(question.value);
+});
+question.addEventListener("input",()=>{
+  question.style.height = "auto";
+  question.style.height = Math.min(question.scrollHeight,120) + "px";
+});
+question.addEventListener("keydown",e=>{
+  if(e.key === "Enter" && !e.shiftKey){
+    e.preventDefault();
+    form.requestSubmit();
+  }
+});
+document.querySelectorAll(".suggestion").forEach(btn=>{
+  btn.addEventListener("click",()=>sendQuestion(btn.textContent));
+});
+clearBtn.addEventListener("click",()=>{
+  messages.innerHTML = `
+    <div class="message">
+      <div class="mini-avatar">✦</div>
+      <div class="bubble">
+        <div class="welcome-title">Cuộc trò chuyện mới</div>
+        Xin chào! Tôi là trợ lý Hoàng Quang Vũ. Bạn muốn hỏi điều gì hôm nay?
+      </div>
+    </div>`;
+  question.focus();
+});
+</script>
+</body>
+</html>

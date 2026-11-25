@@ -1,0 +1,570 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#063b32">
+<title>Lý lịch chính trị - Giáo dục chính trị</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#18352d;
+  background:
+    linear-gradient(rgba(235,244,235,.88),rgba(235,244,235,.92)),
+    url("background.jpg") center/cover fixed no-repeat;
+  min-height:100vh;
+}
+
+header{
+  background:linear-gradient(135deg,#063b32,#08704e);
+  color:white;
+  text-align:center;
+  padding:35px 15px 30px;
+  box-shadow:0 4px 15px #0002;
+}
+
+.header-symbol{font-size:35px;margin-bottom:8px}
+
+header h1{
+  margin:0;
+  font-size:clamp(22px,4vw,32px);
+  font-weight:800;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+header p{
+  margin:10px 0 0;
+  font-size:14px;
+  letter-spacing:1px;
+  opacity:.9;
+}
+
+.container{width:min(1050px,94%);margin:30px auto 45px}
+
+.intro{text-align:center;margin-bottom:25px}
+
+.intro h2{
+  color:#07533e;
+  font-size:22px;
+  margin:0 0 8px;
+  text-transform:uppercase;
+}
+
+.intro p{color:#567064;font-size:14px;line-height:1.6}
+
+.category-card{
+  background:rgba(255,255,255,.94);
+  border:1px solid #d5e4d9;
+  border-radius:15px;
+  margin:18px 0;
+  padding:23px;
+  box-shadow:0 5px 17px rgba(0,50,30,.09);
+  border-left:5px solid #08704e;
+}
+
+.card-heading{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+
+.number{
+  width:43px;height:43px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;color:white;
+  background:linear-gradient(145deg,#0b8055,#064332);
+  font-size:19px;font-weight:bold;
+  box-shadow:0 3px 8px #07533e35;
+}
+
+.card-heading h3{
+  margin:0;color:#07533e;font-size:17px;
+  line-height:1.45;text-transform:uppercase;
+}
+
+.card-description{color:#65786d;font-size:13px;margin:0 0 17px}
+
+.upload-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+
+.upload-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,#08734e,#064332);
+  color:white;border:0;border-radius:8px;
+  padding:12px 19px;font-size:14px;font-weight:bold;
+  cursor:pointer;transition:.2s;
+}
+
+.upload-btn:hover{background:#0b8055;transform:translateY(-1px)}
+.file-input{display:none}
+.file-name{font-size:13px;color:#64756c;overflow-wrap:anywhere}
+.status{margin-top:12px;font-size:13px;line-height:1.5}
+
+.document-area{border-top:1px solid #e2ebe4;margin-top:18px;padding-top:15px}
+.document-title{font-size:13px;font-weight:bold;color:#365c49;margin-bottom:10px}
+.document-list{display:flex;flex-direction:column;gap:8px}
+
+.document-item{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;background:#f1f7f2;border:1px solid #e0ebe2;
+  padding:11px 13px;border-radius:8px;
+}
+
+.document-info{min-width:0;flex:1}
+.document-name{font-size:13px;font-weight:bold;color:#264d39;overflow-wrap:anywhere}
+.document-date{font-size:11px;color:#829087;margin-top:5px}
+
+.document-actions{
+  flex-shrink:0;display:flex;align-items:center;
+  flex-wrap:wrap;gap:6px;
+}
+
+.action-link,.delete-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  color:white;text-decoration:none;border:0;border-radius:6px;
+  font-size:11px;font-weight:bold;padding:9px 11px;
+  cursor:pointer;white-space:nowrap;
+}
+
+.view-link{background:#2475a8}
+.view-link:hover{background:#185a85}
+.download-link{background:#08704e}
+.download-link:hover{background:#064332}
+.delete-btn{background:#b42318}
+.delete-btn:hover{background:#8f1c13}
+.delete-btn:disabled{opacity:.5;cursor:wait}
+
+.empty{font-size:13px;color:#8a9990;font-style:italic}
+
+.notice{
+  background:#fff8e8;border:1px solid #ead9a9;
+  border-radius:10px;padding:14px 16px;color:#775b20;
+  font-size:12px;line-height:1.6;margin-top:25px;
+}
+
+.refresh-row{text-align:center;margin:25px 0}
+
+.refresh-btn{
+  border:1px solid #08704e;background:white;color:#07533e;
+  border-radius:7px;padding:10px 18px;font-weight:bold;cursor:pointer;
+}
+
+footer{
+  background:#063b32;color:white;text-align:center;
+  padding:20px 12px;font-size:12px;line-height:1.7;
+}
+
+.back-link{
+  display:inline-block;color:white;text-decoration:none;
+  border:1px solid #ffffff70;padding:9px 17px;
+  border-radius:7px;margin-top:12px;
+}
+
+.back-link:hover{background:#ffffff20}
+
+@media(max-width:600px){
+  header{padding:27px 12px}
+  .category-card{padding:17px 14px}
+  .card-heading h3{font-size:15px}
+  .document-item{align-items:flex-start;flex-direction:column}
+  .document-actions{width:100%}
+  .action-link,.delete-btn{padding:9px 10px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-symbol">★</div>
+  <h1>GIÁO DỤC LÝ LỊCH CHÍNH TRỊ</h1>
+  <p>HỌC TẬP, NGHIÊN CỨU VÀ QUÁN TRIỆT</p>
+</header>
+
+<main class="container">
+
+  <div class="intro">
+    <h2>KHO TÀI LIỆU HỌC TẬP</h2>
+    <p>
+      Nơi đăng tải, lưu trữ và khai thác tài liệu phục vụ
+      công tác giáo dục chính trị trong đơn vị.
+    </p>
+  </div>
+
+  <section class="category-card" data-category="HỌC TẬP CHỦ NGHĨA MÁC – LÊNIN">
+    <div class="card-heading">
+      <div class="number">01</div>
+      <h3>HỌC TẬP CHỦ NGHĨA MÁC – LÊNIN</h3>
+    </div>
+    <p class="card-description">Tài liệu nghiên cứu, học tập chủ nghĩa Mác – Lênin.</p>
+    <div class="upload-row">
+      <label class="upload-btn">
+        ⬆ TẢI TÀI LIỆU LÊN
+        <input class="file-input" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx">
+      </label>
+      <span class="file-name">Chưa chọn tài liệu</span>
+    </div>
+    <div class="status" aria-live="polite"></div>
+    <div class="document-area">
+      <div class="document-title">TÀI LIỆU ĐÃ ĐĂNG</div>
+      <div class="document-list"><div class="empty">Đang tải danh sách tài liệu...</div></div>
+    </div>
+  </section>
+
+  <section class="category-card" data-category="HỌC TẬP TƯ TƯỞNG HỒ CHÍ MINH">
+    <div class="card-heading">
+      <div class="number">02</div>
+      <h3>HỌC TẬP TƯ TƯỞNG HỒ CHÍ MINH</h3>
+    </div>
+    <p class="card-description">Tài liệu học tập, nghiên cứu tư tưởng Hồ Chí Minh.</p>
+    <div class="upload-row">
+      <label class="upload-btn">
+        ⬆ TẢI TÀI LIỆU LÊN
+        <input class="file-input" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx">
+      </label>
+      <span class="file-name">Chưa chọn tài liệu</span>
+    </div>
+    <div class="status" aria-live="polite"></div>
+    <div class="document-area">
+      <div class="document-title">TÀI LIỆU ĐÃ ĐĂNG</div>
+      <div class="document-list"><div class="empty">Đang tải danh sách tài liệu...</div></div>
+    </div>
+  </section>
+
+  <section class="category-card" data-category="NGHỊ QUYẾT LÃNH ĐẠO CỦA ĐẢNG">
+    <div class="card-heading">
+      <div class="number">03</div>
+      <h3>NGHỊ QUYẾT LÃNH ĐẠO CỦA ĐẢNG</h3>
+    </div>
+    <p class="card-description">Tài liệu nghị quyết, chỉ thị và văn bản lãnh đạo của Đảng.</p>
+    <div class="upload-row">
+      <label class="upload-btn">
+        ⬆ TẢI TÀI LIỆU LÊN
+        <input class="file-input" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx">
+      </label>
+      <span class="file-name">Chưa chọn tài liệu</span>
+    </div>
+    <div class="status" aria-live="polite"></div>
+    <div class="document-area">
+      <div class="document-title">TÀI LIỆU ĐÃ ĐĂNG</div>
+      <div class="document-list"><div class="empty">Đang tải danh sách tài liệu...</div></div>
+    </div>
+  </section>
+
+  <div class="refresh-row">
+    <button class="refresh-btn" onclick="loadDocuments()">↻ LÀM MỚI DANH SÁCH TÀI LIỆU</button>
+  </div>
+
+  <div class="notice">
+    <strong>LƯU Ý:</strong>
+    Chỉ tải lên tài liệu phục vụ công tác giáo dục chính trị,
+    có nội dung phù hợp và được phép phổ biến.
+    Không tải lên tài liệu mật, tài liệu nội bộ hạn chế phổ biến
+    hoặc thông tin cá nhân không được phép công khai.
+    Dung lượng tối đa 10 MB cho mỗi tài liệu.
+  </div>
+
+</main>
+
+<footer>
+  <div>GIÁO DỤC CHÍNH TRỊ – LÝ LỊCH CHÍNH TRỊ</div>
+  <div>ĐOÀN KẾT – KỶ LUẬT – CHÍNH QUY – QUYẾT THẮNG</div>
+  <a class="back-link" href="gdct-co-ban.html">← QUAY LẠI </a>
+</footer>
+
+<script>
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyN0B8yGu_ci5Lqar1pMC3S64JRdIi1wx0hrHGt_Qa43z6iJ2g2gGvUOcQwdCYuhh-5/exec";
+
+const ALLOWED_TYPES = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/vnd.ms-powerpoint",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  "application/vnd.ms-excel",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+];
+
+function showStatus(card,message,color){
+  const status=card.querySelector(".status");
+  status.textContent=message;
+  status.style.color=color||"#456";
+}
+
+function getDocuments(){
+  return new Promise((resolve,reject)=>{
+    const callbackName="documentsCallback_"+Date.now()+"_"+Math.floor(Math.random()*100000);
+    const script=document.createElement("script");
+    let finished=false;
+
+    const timeout=setTimeout(()=>{
+      if(finished)return;
+      finished=true;
+      delete window[callbackName];
+      script.remove();
+      reject(new Error("Quá thời gian chờ tải danh sách."));
+    },20000);
+
+    window[callbackName]=function(documents){
+      if(finished)return;
+      finished=true;
+      clearTimeout(timeout);
+      delete window[callbackName];
+      script.remove();
+      resolve(Array.isArray(documents)?documents:[]);
+    };
+
+    script.onerror=function(){
+      if(finished)return;
+      finished=true;
+      clearTimeout(timeout);
+      delete window[callbackName];
+      script.remove();
+      reject(new Error("Không kết nối được kho tài liệu."));
+    };
+
+    script.src=SCRIPT_URL+
+      "?action=list&callback="+callbackName+"&t="+Date.now();
+
+    document.body.appendChild(script);
+  });
+}
+
+async function loadDocuments(){
+  document.querySelectorAll(".document-list").forEach(list=>{
+    list.innerHTML='<div class="empty">Đang tải danh sách tài liệu...</div>';
+  });
+
+  try{
+    const documents=await getDocuments();
+    renderDocuments(documents);
+  }catch(error){
+    document.querySelectorAll(".document-list").forEach(list=>{
+      list.innerHTML='<div class="empty">'+error.message+'</div>';
+    });
+  }
+}
+
+function renderDocuments(documents){
+  document.querySelectorAll(".category-card").forEach(card=>{
+    const category=card.dataset.category;
+    const list=card.querySelector(".document-list");
+    const filtered=documents.filter(item=>item.category===category);
+
+    list.innerHTML="";
+
+    if(filtered.length===0){
+      list.innerHTML='<div class="empty">Chưa có tài liệu được đăng tải.</div>';
+      return;
+    }
+
+    filtered.forEach(item=>{
+      const row=document.createElement("div");
+      row.className="document-item";
+
+      const info=document.createElement("div");
+      info.className="document-info";
+
+      const name=document.createElement("div");
+      name.className="document-name";
+      name.textContent=item.name||"Tài liệu";
+
+      const date=document.createElement("div");
+      date.className="document-date";
+      date.textContent="Ngày tải lên: "+(item.date||"");
+
+      info.appendChild(name);
+      info.appendChild(date);
+
+      const actions=document.createElement("div");
+      actions.className="document-actions";
+
+      const view=document.createElement("a");
+      view.className="action-link view-link";
+      view.href=item.viewUrl||"#";
+      view.target="_blank";
+      view.rel="noopener";
+      view.textContent="👁 XEM";
+
+      const download=document.createElement("a");
+      download.className="action-link download-link";
+      download.href=item.downloadUrl||"#";
+      download.textContent="⬇ TẢI VỀ";
+      download.setAttribute("download","");
+
+      const remove=document.createElement("button");
+      remove.className="delete-btn";
+      remove.type="button";
+      remove.textContent="✖ XÓA";
+      remove.addEventListener("click",()=>deleteDocument(item,remove));
+
+      actions.appendChild(view);
+      actions.appendChild(download);
+      actions.appendChild(remove);
+
+      row.appendChild(info);
+      row.appendChild(actions);
+      list.appendChild(row);
+    });
+  });
+}
+
+function fileToBase64(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result.split(",")[1]);
+    reader.onerror=()=>reject(new Error("Không đọc được tệp."));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function sendToServer(payload){
+  await fetch(SCRIPT_URL,{
+    method:"POST",
+    mode:"no-cors",
+    headers:{"Content-Type":"text/plain;charset=UTF-8"},
+    body:JSON.stringify(payload)
+  });
+}
+
+function delay(ms){
+  return new Promise(resolve=>setTimeout(resolve,ms));
+}
+
+async function waitForDocument(name,category,shouldExist){
+  for(let i=0;i<8;i++){
+    await delay(2500);
+
+    try{
+      const docs=await getDocuments();
+      const exists=docs.some(item=>
+        item.name===name&&item.category===category
+      );
+
+      if(exists===shouldExist){
+        renderDocuments(docs);
+        return true;
+      }
+    }catch(error){}
+  }
+
+  await loadDocuments();
+  return false;
+}
+
+document.querySelectorAll(".category-card").forEach(card=>{
+  const input=card.querySelector(".file-input");
+  const fileName=card.querySelector(".file-name");
+
+  input.addEventListener("change",async function(){
+    const file=input.files[0];
+    if(!file)return;
+
+    fileName.textContent=file.name;
+
+    if(!ALLOWED_TYPES.includes(file.type)){
+      showStatus(card,"Tệp không đúng định dạng. Chỉ chấp nhận PDF, Word, PowerPoint và Excel.","#b42318");
+      input.value="";
+      fileName.textContent="Chưa chọn tài liệu";
+      return;
+    }
+
+    if(file.size>10*1024*1024){
+      showStatus(card,"Tệp vượt quá dung lượng 10 MB.","#b42318");
+      input.value="";
+      fileName.textContent="Chưa chọn tài liệu";
+      return;
+    }
+
+    if(!confirm("Bạn có chắc muốn tải tài liệu này lên kho chung?\n\n"+file.name)){
+      input.value="";
+      fileName.textContent="Chưa chọn tài liệu";
+      return;
+    }
+
+    showStatus(card,"Đang chuẩn bị tài liệu...","#946200");
+
+    try{
+      const base64=await fileToBase64(file);
+
+      showStatus(card,"Đang gửi tài liệu lên kho lưu trữ...","#946200");
+
+      await sendToServer({
+  action:"upload",
+  fileName:file.name,
+  mimeType:file.type,
+  fileSize:file.size,
+  base64:base64,
+  category:card.dataset.category
+});    showStatus(card,"Đã gửi yêu cầu. Đang xác nhận tài liệu...","#946200");
+
+      const confirmed=await waitForDocument(file.name,card.dataset.category,true);
+
+      if(confirmed){
+        showStatus(card,"Tài liệu đã được tải lên và xuất hiện trong danh sách.","#08704e");
+        fileName.textContent="Đã tải lên: "+file.name;
+      }else{
+        showStatus(card,"Chưa xác nhận được tài liệu trong kho. Hãy làm mới danh sách hoặc kiểm tra Google Drive.","#b42318");
+      }
+
+    }catch(error){
+      showStatus(card,"Không gửi được tài liệu: "+error.message,"#b42318");
+    }
+
+    input.value="";
+  });
+});
+
+async function deleteDocument(item,button){
+  const password=prompt("Nhập mật khẩu quản trị để xóa tài liệu:");
+
+  if(password===null)return;
+
+  if(!password.trim()){
+    alert("Bạn chưa nhập mật khẩu quản trị.");
+    return;
+  }
+
+  const confirmed=confirm(
+    "Bạn có chắc chắn muốn xóa tài liệu này khỏi kho chung?\n\n"+
+    item.name+
+    "\n\nTài liệu sẽ bị đưa vào thùng rác Google Drive."
+  );
+
+  if(!confirmed)return;
+
+  button.disabled=true;
+  button.textContent="ĐANG XÓA...";
+
+  try{
+    await sendToServer({
+      action:"delete",
+      id:item.id,
+      password:password
+    });
+
+    const deleted=await waitForDocument(item.name,item.category,false);
+
+    if(deleted){
+      alert("Đã xóa tài liệu khỏi kho chung.");
+    }else{
+      alert("Chưa xác nhận được việc xóa. Có thể mật khẩu không đúng hoặc máy chủ từ chối thao tác.");
+      await loadDocuments();
+    }
+
+  }catch(error){
+    alert("Không thực hiện được thao tác xóa: "+error.message);
+    await loadDocuments();
+  }finally{
+    button.disabled=false;
+    button.textContent="✖ XÓA";
+  }
+}
+
+loadDocuments();
+</script>
+
+</body>
+</html>
